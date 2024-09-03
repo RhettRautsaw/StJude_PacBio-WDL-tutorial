@@ -1,0 +1,40 @@
+{
+  "humanwgs_family.family": {
+    "family_id": "GIAB_trio",
+    "samples": [
+      {
+        "sample_id": "HG002",
+        "hifi_reads": [
+          "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG002.hifi_reads.bam"
+        ],
+        "affected": true,
+        "sex": "MALE",
+        "father_id": "HG003",
+        "mother_id": "HG004"
+      },
+      {
+        "sample_id": "HG003",
+        "hifi_reads": [
+          "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG003.hifi_reads.bam"
+        ],
+        "affected": true,
+        "sex": "MALE"
+      },
+      {
+        "sample_id": "HG004",
+        "hifi_reads": [
+          "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG004.hifi_reads.bam"
+        ],
+        "affected": true,
+        "sex": "FEMALE"
+      }
+    ]
+  },
+  "humanwgs_family.phenotypes": "HP:0000001,HP:0001518,HP:0002303",
+  "humanwgs_family.ref_map_file": "$HOME/HiFi-human-WGS-WDL_v2.0.0/ref_map.tsv",
+  "humanwgs_family.tertiary_map_file": "$HOME/HiFi-human-WGS-WDL_v2.0.0/tertiary_map.tsv",
+  "humanwgs_family.backend": "HPC",
+  "humanwgs_family.gpu": false,
+  #"humanwgs_family.gpuType": "String? (optional)",
+  "humanwgs_family.preemptible": true
+}

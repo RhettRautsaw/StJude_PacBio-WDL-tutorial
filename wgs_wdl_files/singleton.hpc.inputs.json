@@ -1,0 +1,14 @@
+{
+  "humanwgs_singleton.sample_id": "HG002",
+  "humanwgs_singleton.sex": "MALE",
+  "humanwgs_singleton.hifi_reads": [
+    "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG002.hifi_reads.bam"
+  ],
+  "humanwgs_singleton.phenotypes": "HP:0000001,HP:0001518,HP:0002303",
+  "humanwgs_singleton.ref_map_file": "$HOME/HiFi-human-WGS-WDL_v2.0.0/ref_map.tsv",
+  "humanwgs_singleton.tertiary_map_file": "$HOME/HiFi-human-WGS-WDL_v2.0.0/tertiary_map.tsv",
+  "humanwgs_singleton.backend": "HPC",
+  #"humanwgs_singleton.gpu": "Boolean (optional, default = false)",
+  #"humanwgs_singleton.gpuType": "String? (optional)",
+  "humanwgs_singleton.preemptible": true
+}
