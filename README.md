@@ -1,7 +1,7 @@
 # PacBio WGS Variant Pipeline @ St. Jude
 **2024-09-03**
 
-**Rhett Rautsaw**, Field Applicaitons Bioinformatic Support (FABS) Scientist II, PacBio\
+**Rhett Rautsaw**, Field Applications Bioinformatic Support (FABS) Scientist II, PacBio\
 **Daniel Darnell**, Sr. Bioinformatics Analyst, Hartwell Center for Biotechnology at St. Jude Children's Research Hospital
 
 # Summary
@@ -30,7 +30,8 @@ ssh username@hpc.stjude.org
 
 hpcf_interactive
 
-module load anaconda3
+module load conda3/202311
+conda init
 ```
 
 <br>
