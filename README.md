@@ -2,7 +2,7 @@
 **2024-09-03**
 
 **Rhett Rautsaw**, Field Applicaitons Bioinformatic Support (FABS) Scientist II, PacBio\
-**Daniel Darnell**, Genome Sequencing Analyst, Hartwell Center for Biotechnology at St. Jude Children's Research Hospital
+**Daniel Darnell**, Sr. Bioinformatics Analyst, Hartwell Center for Biotechnology at St. Jude Children's Research Hospital
 
 # Summary
 This document is designed to guide researchers at St. Jude on how to setup, use, and understand the output of PacBio's WGS Variant Pipeline specifically on St. Jude's HPC system. 
@@ -24,9 +24,11 @@ Additionally, check out [St. Jude Cloud](https://platform.stjude.cloud/workflows
 ## Create an Account
 If you do not already have an account for St. Jude's HPC, please visit [WEBSITE] or contact [PERSON].
 
-## Login and load Anaconda
+## Login, start an interactive session, and load Anaconda
 ```
-ssh username@stjude.hpc.org
+ssh username@hpc.stjude.org
+
+hpcf_interactive
 
 module load anaconda3
 ```
