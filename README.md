@@ -14,7 +14,7 @@ For more information regarding the pipeline or St. Jude's HPC system, see the li
     - [Webinar](https://youtu.be/inxVEjQhntI?si=pqRH2-JpsrjLu6U7)
     - [PRISM Presentation](https://youtu.be/fTwRYcBn6w4?si=8KXXw5px--344gSu)
 - St. Jude HPC
-    - Documentation
+    - [Documentation](https://wiki.stjude.org/display/HPCF/)
 
 If you do not have command line experience or want a more push-button solution. I recommend checking out our PacBio secondary analysis partners at [DNAstack](https://omics.ai/workflows/pacbio/), [DNAnexus](https://www.pacb.com/wp-content/uploads/PacBio-DNAnexus.pdf), or [FormBio](https://www.pacb.com/wp-content/uploads/FORM-Bio-flyer.pdf). 
 
