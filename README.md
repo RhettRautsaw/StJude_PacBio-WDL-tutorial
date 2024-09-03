@@ -31,7 +31,9 @@ ssh username@hpc.stjude.org
 hpcf_interactive
 
 module load conda3/202311
-conda init
+#conda init
+conda create -n miniwdl_env
+conda activate miniwdl_env
 ```
 
 <br>
