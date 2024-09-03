@@ -31,8 +31,8 @@
     ]
   },
   "humanwgs_family.phenotypes": "HP:0000001,HP:0001518,HP:0002303",
-  "humanwgs_family.ref_map_file": "$HOME/HiFi-human-WGS-WDL_v2.0.0/ref_map.tsv",
-  "humanwgs_family.tertiary_map_file": "$HOME/HiFi-human-WGS-WDL_v2.0.0/tertiary_map.tsv",
+  "humanwgs_family.ref_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HiFi-human-WGS-WDL_v2.0.0/ref_map.tsv",
+  "humanwgs_family.tertiary_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HiFi-human-WGS-WDL_v2.0.0/tertiary_map.tsv",
   "humanwgs_family.backend": "HPC",
   "humanwgs_family.gpu": false,
   #"humanwgs_family.gpuType": "String? (optional)",
