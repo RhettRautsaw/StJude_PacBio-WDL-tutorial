@@ -22,7 +22,7 @@ Additionally, check out [St. Jude Cloud](https://platform.stjude.cloud/workflows
 
 # 1. Access St. Jude's HPC
 ## Create an Account
-If you do not already have an account for St. Jude's HPC, please visit [WEBSITE] or contact [PERSON].
+If you do not already have an account for St. Jude's HPC, please visit [ServiceNow](https://stjude.service-now.com/sp) to request a login account.
 
 ## Login, start an interactive session, and load Anaconda
 ```
