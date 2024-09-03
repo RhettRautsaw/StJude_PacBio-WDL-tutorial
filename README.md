@@ -32,7 +32,7 @@ hpcf_interactive
 
 module load conda3/202311
 #conda init
-conda create -n miniwdl_env
+conda create -n miniwdl_env pip
 conda activate miniwdl_env
 ```
 
