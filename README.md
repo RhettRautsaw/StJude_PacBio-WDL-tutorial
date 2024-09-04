@@ -1,5 +1,4 @@
 # PacBio WGS Variant Pipeline @ St. Jude
-**2024-09-03**
 
 **Rhett Rautsaw**, Field Applications Bioinformatic Support (FABS) Scientist II, PacBio\
 **Daniel Darnell**, Sr. Bioinformatics Analyst, Hartwell Center for Biotechnology at St. Jude Children's Research Hospital
@@ -26,17 +25,20 @@ If you do not already have an account for St. Jude's HPC, please visit [ServiceN
 
 ## Login, start an interactive session, and load Anaconda
 ```
+# Login to St. Jude HPC
 ssh username@hpc.stjude.org
 
+# Start an Interactive Session
 hpcf_interactive
 
+# Load Anaconda Module
 module load conda3/202311
+
+# Prepare Conda Environment
 #conda init
 conda create -n miniwdl_env pip
 conda activate miniwdl_env
 ```
-
-<br>
 
 # 2. Download and Install Dependencies
 You will only need to run through this section once! The next time you login to St. Jude's HPC the software does not need to be redownloaded, installed, or setup. 
@@ -71,7 +73,6 @@ miniwdl run StJude_PacBio-WDL-tutorial/miniwdl_setup/whale_pod.wdl --dir ~/WHALE
 
 If you run this command a second time, it should complete much faster as it will locate the cached result from the previous successful run. 
 
-
 ## Download PacBio WGS Variant Pipeline (WDL)
 ```
 git clone \
@@ -81,88 +82,69 @@ git clone \
 ```
 
 ## Download Reference Resources
-The reference resources for the workflow can be downloaded from Zenodo. This directory will be ~8.9 GB. **Make sure to save somewhere with sufficient storage.**. 
+A reference genome and additional resources are needed to run several analyses in the WGS Variant Pipeline including alignment, variant calling, filtering, and annotation. We use GRCh38  and the entire reference data bundle (if needed) can be downloaded from [Zenodo](https://zenodo.org/records/13315674). Luckily, these resources have already been downloaded by the Hartwell Center onto St. Jude's HPC and can be easily accessed – no download needed! 
 
-> Perhaps there is a central location Daniel(?) could put this in for EVERYONE to read (but not write over). So that not everyone has to download these data and clog up St. Jude storage capacity. 
+Reference Bundle Directory:
 ```
-## download the reference data bundle
-wget https://zenodo.org/records/13315674/files/hifi-wdl-resources-v2.0.0-rc2.tar
-
-## extract the reference data bundle and rename directory
-tar -xvf hifi-wdl-resources-v2.0.0-rc2.tar
-mv hifi-wdl-resources-v2.0.0-rc2 wdl-humanwgs.v2.0.0-rc2.resources
-rm hifi-wdl-resources-v2.0.0-rc2.tar
-
-## set resources path
-RESOURCES="$PWD/wdl-humanwgs.v2.0.0-rc2.resources"
+/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0-rc2.resources
 ```
 
-## Setup Reference/Tertiary Map Files
+### Setup Reference/Tertiary Map Files
+For the WDL workflow to locate these reference resources, two tab-delimited map files are supplied as input. An example of these files can be found in the [`wgs_wdl_files`](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/wgs_wdl_files) directory of this repository. 
 
-> If there is a central location for the files above, then I can put a copy of pre-formatted ref_map and tertiary_map files into this repository and avoid this crazy looking perl/sed command. 
+- [ref_map.tsv](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/blob/main/wgs_wdl_files/ref_map.tsv)
+- [tertiary_map.tsv](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/blob/main/wgs_wdl_files/tertiary_map.tsv)
 
+These files have also been prepared for you and are on St. Jude's HPC – you can use these files directly – no additional prep needed!
+
+Map Files:
 ```
-perl -pe "s|\<prefix\>/hifi-wdl-resources-v2.0.0-rc2|$RESOURCES|g" \
-    HiFi-human-WGS-WDL_v2.0.0/backends/hpc/GRCh38.ref_map.v2p0p0-rc2.template.tsv > \
-    HiFi-human-WGS-WDL_v2.0.0/ref_map.tsv
-
-perl -pe "s|\<prefix\>/hifi-wdl-resources-v2.0.0-rc2|$RESOURCES|g" \
-    HiFi-human-WGS-WDL_v2.0.0/backends/hpc/GRCh38.tertiary_map.v2p0p0-rc2.template.tsv > \
-    HiFi-human-WGS-WDL_v2.0.0/tertiary_map.tsv
+/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/ref_map.tsv
+/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/tertiary_map.tsv
 ```
 
 ## Download Example Data (optional)
-If you don't have your own data, then you can download example data from [PacBio Datasets](https://www.pacb.com/connect/datasets/). The workflow expects ~30x WGS coverage; therefore, we will download Revio HiFi data from the Genome-In-A-Bottle (GIAB) trio. Each of the three bam files is ~40-50 GB of data (~90 Gbp HiFi yield = 30x coverage). **Make sure to download somewhere with sufficient storage.** 
+Finally, we need some data to analyze! Briefly, the workflow expects ~30x WGS coverage.
 
-I am also creating a symbolic link to each of these files with a more understandable name (i.e., HG002, HG003, HG004)
+If you don't have your own data, then you can use [PacBio's GIAB trio dataset](https://www.pacb.com/connect/datasets/). These files have also been downloaded and placed on St. Jude's HPC for this tutorial.
 
-> Perhaps there is a central location Daniel(?) could put this in for EVERYONE to read (but not write over). So that not everyone has to download these data and clog up St. Jude storage capacity. 
-
+Example Data uBAM Files:
 ```
-# HG002 (proband)
-wget https://downloads.pacbcloud.com/public/revio/2022Q4/HG002-rep1/m84011_220902_175841_s1.hifi_reads.bam
-ln -s m84011_220902_175841_s1.hifi_reads.bam HG002.hifi_reads.bam
-
-# HG003 (father)
-wget https://downloads.pacbcloud.com/public/revio/2022Q4/HG003-rep1/m84010_220919_235306_s2.hifi_reads.bam
-ln -s m84010_220919_235306_s2.hifi_reads.bam HG003.hifi_reads.bam
-
-# HG004 (mother)
-wget https://downloads.pacbcloud.com/public/revio/2022Q4/HG004-rep1/m84010_220919_232145_s1.hifi_reads.bam
-ln -s m84010_220919_232145_s1.hifi_reads.bam HG004.hifi_reads.bam
+/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG002.hifi_reads.bam # Proband
+/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG003.hifi_reads.bam # Father
+/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG004.hifi_reads.bam # Mother
 ```
-
-<br>
 
 # 3. Setup Input Files
+The primary input for miniwdl and the WGS Variant Pipeline is a JSON file with information such as the sample ID, sample sex, HiFi bam file locations,[Human Phenotype Ontology](https://hpo.jax.org/) (if you want to run tertiary analysis), and the location of the reference/tertiary map files. 
+
+If you are running the GIAB trio as an example, then you can use the example files found in the [`wgs_wdl_files`](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/wgs_wdl_files). If you are running your own data, then these files can be used as a template and the sample ID, sex, and HiFi bam files updated.
+
+The WGS Variant Pipeline has two analysis modes:
+- Singleton Analysis
+- Family Analysis (cohorts of 3-5 related samples)
 
 ## Singleton Analysis Input
-singleton.hpc.inputs.json
-
-> If there is a central location for the files above, then I can put a pre-formatted singleton.hpc.inputs.json into this repository to make this easy. However, we should still walk the customers through how to modify these files.  
-
+[singleton.hpc.inputs.json](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/blob/main/wgs_wdl_files/singleton.hpc.inputs.json)
 ```
 {
   "humanwgs_singleton.sample_id": "HG002",
   "humanwgs_singleton.sex": "MALE",
   "humanwgs_singleton.hifi_reads": [
-    "/path/to/HG002.hifi_reads.bam"
+    "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG002.hifi_reads.bam"
   ],
-  "humanwgs_singleton.phenotypes": "",
-  "humanwgs_singleton.ref_map_file": "/path/to/HiFi-human-WGS-WDL_v2.0.0/ref_map.tsv",
-  "humanwgs_singleton.tertiary_map_file": "/path/to/HiFi-human-WGS-WDL_v2.0.0/tertiary_map.tsv",
+  "humanwgs_singleton.phenotypes": "HP:0000001,HP:0001518,HP:0002303",
+  "humanwgs_singleton.ref_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/ref_map.tsv",
+  "humanwgs_singleton.tertiary_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/tertiary_map.tsv",
   "humanwgs_singleton.backend": "HPC",
-  #"humanwgs_singleton.gpu": "Boolean (optional, default = false)",
+  "humanwgs_singleton.gpu": false,
   #"humanwgs_singleton.gpuType": "String? (optional)",
   "humanwgs_singleton.preemptible": true
 }
 ```
 
 ## Family Analysis Input
-family.hpc.inputs.json
-
-> If there is a central location for the files above, then I can put a pre-formatted family.hpc.inputs.json into this repository to make this easy. However, we should still walk the customers through how to modify these files.  
-
+[family.hpc.inputs.json](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/blob/main/wgs_wdl_files/family.hpc.inputs.json)
 ```
 {
   "humanwgs_family.family": {
@@ -171,9 +153,9 @@ family.hpc.inputs.json
       {
         "sample_id": "HG002",
         "hifi_reads": [
-          "/path/to/HG002.hifi_reads.bam"
+          "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG002.hifi_reads.bam"
         ],
-        "affected": false,
+        "affected": true,
         "sex": "MALE",
         "father_id": "HG003",
         "mother_id": "HG004"
@@ -181,36 +163,33 @@ family.hpc.inputs.json
       {
         "sample_id": "HG003",
         "hifi_reads": [
-          "/path/to/HG003.hifi_reads.bam"
+          "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG003.hifi_reads.bam"
         ],
-        "affected": false,
+        "affected": true,
         "sex": "MALE"
       },
       {
         "sample_id": "HG004",
         "hifi_reads": [
-          "/path/to/HG004.hifi_reads.bam"
+          "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG004.hifi_reads.bam"
         ],
-        "affected": false,
+        "affected": true,
         "sex": "FEMALE"
-      },
+      }
     ]
   },
-  "humanwgs_family.phenotypes": "String? (optional)",
-  "humanwgs_family.ref_map_file": "/path/to/HiFi-human-WGS-WDL_v2.0.0/ref_map.tsv",
-  "humanwgs_family.tertiary_map_file": "/path/to/HiFi-human-WGS-WDL_v2.0.0/tertiary_map.tsv",
+  "humanwgs_family.phenotypes": "HP:0000001,HP:0001518,HP:0002303",
+  "humanwgs_family.ref_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/ref_map.tsv",
+  "humanwgs_family.tertiary_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/tertiary_map.tsv",
   "humanwgs_family.backend": "HPC",
-  #"humanwgs_family.gpu": "Boolean (optional, default = false)",
+  "humanwgs_family.gpu": false,
   #"humanwgs_family.gpuType": "String? (optional)",
   "humanwgs_family.preemptible": true
 }
 ```
-<br>
 
 # 4. Run WGS Variant Pipeline
-
 ## Singleton Analysis
-
 miniwdl is a workflow manager that submits a series of parallel jobs to your HPC. Generally, this must be run from the login/head/queue node; therefore, you need to either (1) maintain an active connection until the workflow completes or (2) run the workflow in the background so that if SSH connection to your HPC is lost, the workflow will continue. 
 
 I choose to use `tmux` to setup background jobs; however, **IF** your HPC allows for sub-job submissions (i.e., jobs to be submitted from compute nodes rather than the head node) then you may be able to use `bsub` instead. 
@@ -238,15 +217,11 @@ bsub -q [queue_name] -o pbSingle.lsf.out -e pbSingle.lsf.err "miniwdl run HiFi-h
 
 ## Family Analysis
 You can also run the family analysis again either using `tmux` or `bsub`. Below is the base miniwdl code to run.
-
 ```
 miniwdl run HiFi-human-WGS-WDL_v2.0.0/workflows/family.wdl --input family.hpc.inputs.json --dir pbFamily
 ```
 
-<br>
-
 # 5. Understanding the Output
-
 A directory named `pbSingle`/`pbFamily` will be created and inside these directories will be another dated directory with the format (`YYYYMMDD_HHMMSS_humanwgs_singleton`/`_family`) corresponding to when the workflow was started. If a workflow needs to be restarted, you can submit the same command and it will create a second dated directory and cache the successful parts of the previous run to get to completion faster.
 
 Inside `pbSingle/YYYYMMDD_HHMMSS_humanwgs_singleton`, you will find several `call-*` directories which are the working directories for different parts of the workflow. Unless you are attempting to troubleshoot why your workflow is failing, these can be ignored. 
@@ -257,70 +232,45 @@ If this is a family analysis, you may yet find subdirectories beneath this for e
 ```
 pbFamily/
  └── 20240903_131313_humanwgs_family/
-		└── out/
-			└── phased_small_variant_vcf/
-				├── 0
-				│   └── HG002.GIAB_trio.joint.GRCh38.deepvariant.glnexus.phased.vcf.gz
-				├── 1
-				│   └── HG003.GIAB_trio.joint.GRCh38.deepvariant.glnexus.phased.vcf.gz
-				└── 2 
-					└── HG004.GIAB_trio.joint.GRCh38.deepvariant.glnexus.phased.vcf.gz
+      └── out/
+	    └── phased_small_variant_vcf/
+		    ├── 0
+		    │   └── HG002.GIAB_trio.joint.GRCh38.deepvariant.glnexus.phased.vcf.gz
+		    ├── 1
+		    │   └── HG003.GIAB_trio.joint.GRCh38.deepvariant.glnexus.phased.vcf.gz
+		    └── 2 
+			└── HG004.GIAB_trio.joint.GRCh38.deepvariant.glnexus.phased.vcf.gz
 ```
 
-<br>
-
 # 6. Next Steps: Tertiary Analysis
-
 Unfortunately, unlike secondary analysis where we can fairly confidently say that DeepVariant is the recommended tool for SNVs and TRGT is the recommended tool for tandem repeats, tertiary analysis is less straightforward. There are many tools available and no consensus on what tool is best. I would primarily working with our tertiary partners, but there are also a number of third-party software available to test.
 
 This is a rapidly evolving space especially as we learn more and more about the human genome and uncover a more comprehensive view of variants beyond SNVs. This is your space to experiment and see what you can discover!
 
 ## PacBio Tertiary Analysis Partners
-
 - [GeneYx](https://geneyx.com/)
 - [GoldenHelix](https://www.goldenhelix.com/)
 
 ## Third Party Software
-
-<style>
-  .two-column {
-    display: flex;
-    justify-content: space-between;
-  }
-  .column {
-    width: 48%;
-  }
-</style>
-
-<div class="two-column">
-  <div class="column">
+### SNVs/Indels
+- **Annotation**
+	- [slivar](https://github.com/brentp/slivar)
+	- [VEP](https://useast.ensembl.org/info/docs/tools/vep/index.html)
+	- [SnpEff](https://pcingola.github.io/SnpEff/snpeff/introduction/)/[SnpSift](https://pcingola.github.io/SnpEff/snpsift/introduction/)
+	- [oakvar](https://rkimoakbioinformatics.github.io/oakvar/)
+- **Pathogenicity prediction**
+	- [ClinPred](https://sites.google.com/site/clinpred/)
+	- [MAGPIE](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-023-01274-4)
   
-  ### SNVs/Indels
-  - **Annotation**
-      - [slivar](https://github.com/brentp/slivar)
-      - [VEP](https://useast.ensembl.org/info/docs/tools/vep/index.html)
-      - [SnpEff](https://pcingola.github.io/SnpEff/snpeff/introduction/)/[SnpSift](https://pcingola.github.io/SnpEff/snpsift/introduction/)
-      - [oakvar](https://rkimoakbioinformatics.github.io/oakvar/)
-  - **Pathogenicity prediction**
-      - [ClinPred](https://sites.google.com/site/clinpred/)
-      - [MAGPIE](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-023-01274-4)
-  
-  </div>
-  
-  <div class="column">
-  
-  ### SVs, CNVs, & Tandem Repeats
-  - **Annotation**
-      - [svpack](https://github.com/PacificBiosciences/svpack)
-      - [SnpEff](https://pcingola.github.io/SnpEff/snpeff/introduction/)/[SnpSift](https://pcingola.github.io/SnpEff/snpsift/introduction/)
-  - **Pathogenicity prediction**
-      - [svAnna](https://github.com/monarch-initiative/SvAnna)
-      - [Postre](https://github.com/vicsanga/Postre)
-      - [TRexs](https://github.com/PacificBiosciences/TRexs) – deprecated
-      - [RExPRT](https://github.com/ZuchnerLab/RExPRT)
-  
-  </div>
-</div>
+### SVs, CNVs, & Tandem Repeats
+- **Annotation**
+	- [svpack](https://github.com/PacificBiosciences/svpack)
+	- [SnpEff](https://pcingola.github.io/SnpEff/snpeff/introduction/)/[SnpSift](https://pcingola.github.io/SnpEff/snpsift/introduction/)
+- **Pathogenicity prediction**
+	- [svAnna](https://github.com/monarch-initiative/SvAnna)
+	- [Postre](https://github.com/vicsanga/Postre)
+	- [TRexs](https://github.com/PacificBiosciences/TRexs) – deprecated
+	- [RExPRT](https://github.com/ZuchnerLab/RExPRT)
 
 ### Resources/Databases
 Useful for filtering out common variants or identifying known pathogenic variants
