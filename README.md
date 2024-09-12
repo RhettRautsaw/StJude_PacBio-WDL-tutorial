@@ -99,8 +99,8 @@ These files have also been prepared for you and are on St. Jude's HPC – you c
 
 Map Files:
 ```
-/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/ref_map.tsv
-/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/tertiary_map.tsv
+/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0-rc2.resources/ref_map.tsv
+/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0-rc2.resources/tertiary_map.tsv
 ```
 
 ## Download Example Data (optional)
@@ -134,8 +134,8 @@ The WGS Variant Pipeline has two analysis modes:
     "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/HG002.hifi_reads.bam"
   ],
   "humanwgs_singleton.phenotypes": "HP:0000001,HP:0001518,HP:0002303",
-  "humanwgs_singleton.ref_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/ref_map.tsv",
-  "humanwgs_singleton.tertiary_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/tertiary_map.tsv",
+  "humanwgs_singleton.ref_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0-rc2.resources/ref_map.tsv",
+  "humanwgs_singleton.tertiary_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0-rc2.resources/tertiary_map.tsv",
   "humanwgs_singleton.backend": "HPC",
   "humanwgs_singleton.gpu": false,
   #"humanwgs_singleton.gpuType": "String? (optional)",
@@ -179,8 +179,8 @@ The WGS Variant Pipeline has two analysis modes:
     ]
   },
   "humanwgs_family.phenotypes": "HP:0000001,HP:0001518,HP:0002303",
-  "humanwgs_family.ref_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/ref_map.tsv",
-  "humanwgs_family.tertiary_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/tertiary_map.tsv",
+  "humanwgs_family.ref_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0-rc2.resources/ref_map.tsv",
+  "humanwgs_family.tertiary_map_file": "/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0-rc2.resources/tertiary_map.tsv",
   "humanwgs_family.backend": "HPC",
   "humanwgs_family.gpu": false,
   #"humanwgs_family.gpuType": "String? (optional)",
