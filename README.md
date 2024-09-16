@@ -76,7 +76,7 @@ If you run this command a second time, it should complete much faster as it will
 ## Download PacBio WGS Variant Pipeline (WDL)
 ```
 git clone \
-  --depth 1 --branch v2.0.0-rc2 \
+  --depth 1 --branch v2.0.0-rc4 \
   --recursive \
   https://github.com/PacificBiosciences/HiFi-human-WGS-WDL.git HiFi-human-WGS-WDL_v2.0.0
 ```
@@ -194,11 +194,21 @@ miniwdl is a workflow manager that submits a series of parallel jobs to your HPC
 
 I choose to use `tmux` to setup background jobs; however, **IF** your HPC allows for sub-job submissions (i.e., jobs to be submitted from compute nodes rather than the head node) then you may be able to use `bsub` instead. 
 
-#### Option 1: tmux
+#### Option 1: bsub
+```
+bsub -R "rusage[mem=5000]" -q standard \
+	miniwdl run HiFi-human-WGS-WDL_v2.0.0/workflows/singleton.wdl \
+	--input StJude_PacBio-WDL-tutorial/wgs_wdl_files/singleton.hpc.inputs.json \
+	--dir pbSingle
+```
+
+#### Option 2: tmux
 ```
 tmux new -s pbSingle 
 
-miniwdl run HiFi-human-WGS-WDL_v2.0.0/workflows/singleton.wdl --input singleton.hpc.inputs.json --dir pbSingle
+miniwdl run HiFi-human-WGS-WDL_v2.0.0/workflows/singleton.wdl \
+	--input StJude_PacBio-WDL-tutorial/wgs_wdl_files/singleton.hpc.inputs.json \
+	--dir pbSingle
 ```
 
 Detach tmux session by hitting `Ctrl+b` and then `d`. This will allow miniwdl to continue running in the background. If you'd like to view progress and the output of miniwdl, you can reattach your session by typing:
@@ -208,11 +218,6 @@ tmux attach -t pbSingle
 ```
 
 Once miniwdl completes, you can close the tmux session by typing exit in the attached session
-
-#### Option 2: bsub
-```
-bsub -q [queue_name] -o pbSingle.lsf.out -e pbSingle.lsf.err "miniwdl run HiFi-human-WGS-WDL_v2.0.0/workflows/singleton.wdl --input singleton.hpc.inputs.json --dir pbSingle"
-```
 
 
 ## Family Analysis
@@ -283,3 +288,21 @@ Useful for filtering out common variants or identifying known pathogenic variant
 - [AnVIL](https://anvilproject.org/data/consortia?filter=%5B%7B%22categoryKey%22%3A%22dataType%22%2C%22value%22%3A%5B%22Whole+Long-read+Genome%22%2C%22Whole+Long-read+Genome+Methylation%22%5D%7D%5D)
 - [colorsDB](https://colorsdb.org/): [Zenodo](https://zenodo.org/records/11511513)
 	- [HiFiSolves](https://hifisolves.org/collections)
+
+# 7. Additional Workflows
+
+Now that you know how to use miniwdl to run WDL workflows, check out some of our other WDL workflows for making the most of your HiFi data. 
+
+- Assemble *de novo* genomes with our [Human Genome Assembly Pipeline](https://github.com/PacificBiosciences/HiFi-human-assembly-WDL) 
+- Call somatic variants with tumor-normal HiFi data with our [Somatic Variant Pipeline](https://github.com/PacificBiosciences/HiFi-somatic-WDL)
+	- [Watch the Webinar](https://programs.pacb.com/l/1652/2024-08-20/44rwp7?utm_source=Website&utm_medium=eventsPage&utm_term=button&utm_content=RegisterCTA&utm_campaign=2024-08-Webinar-BFX-Cancer-OnDemand)
+- Assemble and explore metagenomes with our [HiFi MAG Pipeline](https://github.com/PacificBiosciences/HiFi-MAG-WDL)
+- Check out [SMRT Tools](https://www.pacb.com/support/software-downloads/) for additional workflows such as:
+	- [SMRT Tools Documentation](https://www.pacb.com/wp-content/uploads/SMRT-Tools-Reference-Guide-v13.1.pdf): Workflows start in Appendix A (page 132)
+		- HiFi Target Enrichment Pipeline
+		- PureTarget Repeat Expansion Pipeline
+		- Microbial Genome Analysis Pipeline
+		- Kinnex Read Segmentation & Iso-Seq Analysis Pipeline
+		- Kinnex Read Segmentation & single-cell Iso-Seq Analysis Pipeline
+	- Note: These can only be run with pbcromwell rather than miniwdl. Contact your PacBio FABS for additional support
+
