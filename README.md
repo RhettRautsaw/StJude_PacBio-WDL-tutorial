@@ -17,8 +17,6 @@ For more information regarding the pipeline or St. Jude's HPC system, see the li
 
 If you do not have command line experience or want a more push-button solution. I recommend checking out our PacBio secondary analysis partners at [DNAstack](https://omics.ai/workflows/pacbio/), [DNAnexus](https://www.pacb.com/wp-content/uploads/PacBio-DNAnexus.pdf), or [FormBio](https://www.pacb.com/wp-content/uploads/FORM-Bio-flyer.pdf). 
 
-Additionally, check out [St. Jude Cloud](https://platform.stjude.cloud/workflows) powered by DNAnexus for an on-premise cloud-based solution (...HOPEFULLY...)
-
 # 1. Access St. Jude's HPC
 ## Create an Account
 If you do not already have an account for St. Jude's HPC, please visit [ServiceNow](https://stjude.service-now.com/sp) to request a login account.
