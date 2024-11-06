@@ -13,29 +13,29 @@ If there are future releases to the WDL workflow with updated resources, I recom
 Finally, if you would like to download the resources yourself, here are the steps taken:
 
 ## Download Reference Resources
-Visit [Zenodo](https://zenodo.org/records/13315674) to find the latest version of the reference data bundle and copy the URL. 
+Visit [Zenodo](https://doi.org/10.5281/zenodo.7922356) to find the latest version of the reference data bundle and copy the URL. 
 
 You will need to update the URL and name of the resources folder below:
 ```
 ## Download the reference data bundle
-wget https://zenodo.org/records/13315674/files/hifi-wdl-resources-v2.0.0-rc2.tar
+wget https://zenodo.org/records/13315674/files/hifi-wdl-resources-v2.0.0.tar
 
 ## Extract the reference data bundle
-tar -xvf hifi-wdl-resources-v2.0.0-rc2.tar
+tar -xvf hifi-wdl-resources-v2.0.0.tar
 
 ## Rename the directory and remove the tar file to save room (optional)
-mv hifi-wdl-resources-v2.0.0-rc2 wdl-humanwgs.v2.0.0-rc2.resources
-rm hifi-wdl-resources-v2.0.0-rc2.tar
+mv hifi-wdl-resources-v2.0.0 wdl-humanwgs.v2.0.0.resources
+rm hifi-wdl-resources-v2.0.0.tar
 
 ## Set NEW_RESOURCES variable for next step
-NEW_RESOURCES="$PWD/wdl-humanwgs.v2.0.0-rc2.resources"
+NEW_RESOURCES="$PWD/wdl-humanwgs.v2.0.0.resources"
 ```
 
 ## Setup Reference/Tertiary Map Files
 
 You can edit the ref_map files yourself or use the files in this folder as a template to replace the old resource path with the new resource path.
 ```
-OLD_RESOURCES="/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0-rc2.resources"
+OLD_RESOURCES="/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources"
 
 perl -pe "s|$OLD_RESOURCES|$NEW_RESOURCES|g" wgs_wdl_files/ref_map.tsv > $NEW_RESOURCES/ref_map.tsv
 perl -pe "s|$OLD_RESOURCES|$NEW_RESOURCES|g" wgs_wdl_files/tertiary_map.tsv > $NEW_RESOURCES/tertiary_map.tsv
