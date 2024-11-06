@@ -18,7 +18,7 @@ Visit [Zenodo](https://doi.org/10.5281/zenodo.7922356) to find the latest versio
 You will need to update the URL and name of the resources folder below:
 ```
 ## Download the reference data bundle
-wget https://zenodo.org/records/13315674/files/hifi-wdl-resources-v2.0.0.tar
+wget https://zenodo.org/records/14027047/files/hifi-wdl-resources-v2.0.0.tar
 
 ## Extract the reference data bundle
 tar -xvf hifi-wdl-resources-v2.0.0.tar
