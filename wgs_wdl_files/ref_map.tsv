@@ -8,5 +8,5 @@ hificnv_exclude_bed	/research/rgs01/applications/hpcf/authorized_apps/hartwell/A
 hificnv_exclude_bed_index	/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources/GRCh38/hificnv/cnv.excluded_regions.common_50.hg38.bed.gz.tbi
 hificnv_expected_bed_male	/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources/GRCh38/hificnv/expected_cn.hg38.XY.bed
 hificnv_expected_bed_female	/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources/GRCh38/hificnv/expected_cn.hg38.XX.bed
-pharmcat_positions_vcf	/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources/GRCh38/pharmcat/pharmcat_positions_2.15.0.vcf.bgz
-pharmcat_positions_vcf_index	/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources/GRCh38/pharmcat/pharmcat_positions_2.15.0.vcf.bgz.csi
+pharmcat_positions_vcf	/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources/GRCh38/pharmcat/pharmcat_positions_2.15.4.vcf.bgz
+pharmcat_positions_vcf_index	/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources/GRCh38/pharmcat/pharmcat_positions_2.15.4.vcf.bgz.csi
