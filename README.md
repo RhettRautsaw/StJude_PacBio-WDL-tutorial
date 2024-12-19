@@ -229,7 +229,7 @@ A directory named `pbSingle`/`pbFamily` will be created and inside these directo
 
 Inside `pbSingle/YYYYMMDD_HHMMSS_humanwgs_singleton`, you will find several `call-*` directories which are the working directories for different parts of the workflow. Unless you are attempting to troubleshoot why your workflow is failing, these can be ignored. 
 
-Focus on the `out` directory and `outputs.json` file as the final outputs. In particular, the `out` directory will contain several sub-directories for different tasks in the workflow. You can find a full description of each of these directories here [(Output Directories Docs)](https://github.com/PacificBiosciences/HiFi-human-WGS-WDL/blob/feature/v2/docs/singleton.md#outputs).
+Focus on the `out` directory and `outputs.json` file as the final outputs. In particular, the `out` directory will contain several sub-directories for different tasks in the workflow. You can find a full description of each of these directories here [(Output Directories Docs)](https://github.com/PacificBiosciences/HiFi-human-WGS-WDL/blob/main/docs/singleton.md).
 
 If this is a family analysis, you may yet find subdirectories beneath this for each sample in your family. These will be numbered based on the order they are supplied in the input WDL. For example:
 ```
