@@ -73,8 +73,8 @@ If you run this command a second time, it should complete much faster as it will
 
 # Tutorials
 Now you are ready to start the tutorials! We have tutorials available for running the following workflows:
-- [PacBio WGS Variant Pipeline](): Use this workflow to call all variant types (SNVs, indels, SVs, CNVs, and tandem repeats) from HiFi WGS data. 
-- [PacBio Somatic Variant Pipeline](): Use this workflow to call somatic variants from tumor-normal HiFi WGS data.
+- [PacBio WGS Variant Pipeline](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/WGS_Variant_Pipeline): Use this workflow to call all variant types (SNVs, indels, SVs, CNVs, and tandem repeats) from HiFi WGS data. 
+- [PacBio Somatic Variant Pipeline](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/Somatic_Variant_Pipeline): Use this workflow to call somatic variants from tumor-normal HiFi WGS data.
 
 <div style="display: flex; align-items: flex-start;">
   <img src="imgs/WGSVariantWorkflow.png" width="43%" />
