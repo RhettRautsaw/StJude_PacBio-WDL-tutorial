@@ -1,4 +1,4 @@
-<img src="imgs/PacBio.png" width="50%" />
+<img src="imgs/PacBio.PNG" width="50%" />
 
 #  WDL Workflow Tutorials @ St. Jude
 
