@@ -37,8 +37,8 @@ You can edit the ref_map files yourself or use the files in this folder as a tem
 ```
 OLD_RESOURCES="/research/rgs01/applications/hpcf/authorized_apps/hartwell/Automation/REF/wdl-humanwgs.v2.0.0.resources"
 
-perl -pe "s|$OLD_RESOURCES|$NEW_RESOURCES|g" wgs_wdl_files/ref_map.tsv > $NEW_RESOURCES/ref_map.tsv
-perl -pe "s|$OLD_RESOURCES|$NEW_RESOURCES|g" wgs_wdl_files/tertiary_map.tsv > $NEW_RESOURCES/tertiary_map.tsv
+perl -pe "s|$OLD_RESOURCES|$NEW_RESOURCES|g" resources/ref_map.tsv > $NEW_RESOURCES/ref_map.tsv
+perl -pe "s|$OLD_RESOURCES|$NEW_RESOURCES|g" resources/tertiary_map.tsv > $NEW_RESOURCES/tertiary_map.tsv
 ```
 
 ## Download Example Data (optional)
