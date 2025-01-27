@@ -102,7 +102,7 @@ I choose to use `tmux` to setup background jobs; however, St. Jude's HPC allows 
 ```
 bsub -R "rusage[mem=5000]" -q standard \
 	miniwdl run HiFi-Somatic-WDL_v0.8.1/hifisomatic.wdl \
-	--input resources/somatic.hpc.inputs.json \
+	--input StJude_PacBio-WDL-tutorial/Somatic_Variant_Pipeline/resources/somatic.hpc.inputs.json \
 	--dir COLO829_out
 ```
 
