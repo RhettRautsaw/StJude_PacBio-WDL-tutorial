@@ -73,13 +73,13 @@ If you run this command a second time, it should complete much faster as it will
 
 # Tutorials
 Now you are ready to start the tutorials! We have tutorials available for running the following workflows:
-- [PacBio WGS Variant Pipeline](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/WGS_Variant_Pipeline): Use this workflow to call all variant types (SNVs, indels, SVs, CNVs, and tandem repeats) from HiFi WGS data. 
-- [PacBio Somatic Variant Pipeline](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/Somatic_Variant_Pipeline): Use this workflow to call somatic variants from tumor-normal HiFi WGS data.
 
-<div style="display: flex; align-items: flex-start;">
-  <img src="imgs/WGSVariantWorkflow.png" width="43%" />
-  <img src="imgs/SomaticWorkflow.png" width="53%" />
-</div>
+| Workflow | Description | Flowchart |
+|----------|-------------|-----------|
+| [PacBio WGS Variant Pipeline](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/WGS_Variant_Pipeline) | Use this workflow to call all variant types (SNVs, indels, SVs, CNVs, and tandem repeats) from HiFi WGS data. | <img src="imgs/WGSVariantWorkflow.png" width="75%" /> |
+| [PacBio Somatic Variant Pipeline](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/Somatic_Variant_Pipeline) | Use this workflow to call somatic variants from tumor-normal HiFi WGS data. | <img src="imgs/SomaticWorkflow.png" width="75%" /> |
+| [Kinnex Full-Length (bulk) Iso-Seq (RNA) Pipeline](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/Kinnex_IsoSeq_Pipelines) | Use this workflow to process full-length (bulk) Kinnex data, call isoforms, quantify isoforms, and perform differential expression | <img src="imgs/Kinnex_bulkRNA_Workflow.png" /> |
+| [Kinnex Single-Cell Iso-Seq (RNA) Pipeline](https://github.com/RhettRautsaw/StJude_PacBio-WDL-tutorial/tree/main/Kinnex_IsoSeq_Pipelines) | Use this workflow to process 10x single-cell Kinnex Iso-Seq (RNA) data, extract cell barcodes, deduplicate, call isoforms, quantify isoforms, and prepare Seurat matrices | <img src="imgs/Kinnex_scRNA_Workflow.png" /> |
 
 ## Additional Workflows Available (no tutorials yet)
 
@@ -100,7 +100,7 @@ Now that you know how to use miniwdl to run WDL workflows, check out some of our
 		- HiFi Target Enrichment Pipeline
 		- PureTarget Repeat Expansion Pipeline
 		- Microbial Genome Analysis Pipeline
-		- Kinnex Read Segmentation & Iso-Seq Analysis Pipeline
-		- Kinnex Read Segmentation & single-cell Iso-Seq Analysis Pipeline
+		- (Official) Kinnex Read Segmentation & Iso-Seq Analysis Pipeline
+		- (Official) Kinnex Read Segmentation & single-cell Iso-Seq Analysis Pipeline
 	- > Note: These can only be run with pbcromwell rather than miniwdl. Contact your PacBio FABS for additional support
 
